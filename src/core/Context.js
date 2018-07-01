@@ -14,12 +14,12 @@ export type ContextProps = {
 }
 
 /**
- * Hight level class for context
+ * Application context
  */
-export default class Context {
+class Context {
   /**
    * Env url
-   * Eg.: https://ccstore-test-zboa.oracleoutsourcing.com
+   * Eg.: https://ccstore-<env>.oracleoutsourcing.com
    */
   envUrl: string;
   enableEnvAuth: boolean;
@@ -73,11 +73,21 @@ export default class Context {
     this.envUrl = url;
   }
 
+  /**
+   * Get base path value
+   * @return {string} base path
+   */
   getBasePath(): string {
     return this.basePath;
   }
 
+  /**
+   * Set base path value
+   * @param {string} path 
+   */
   setBasePath(path: string) {
     this.basePath = path;
   }
 }
+
+export default Context;

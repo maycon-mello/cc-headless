@@ -40,3 +40,4 @@ benchmarks/graphs
 /.nyc_output
 
 /logs
+/doc

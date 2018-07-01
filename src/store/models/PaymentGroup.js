@@ -14,7 +14,7 @@ export type PaymentGroupConstructor = {
   currencyCode: string;
 }
 
-export default class PaymentGroup {
+class PaymentGroup {
   paymentGroupId: string;
   amount: number;
   customPaymentProperties: Object;
@@ -40,3 +40,5 @@ export default class PaymentGroup {
     this.currencyCode = props.currencyCode;
   }
 }
+
+export default PaymentGroup;

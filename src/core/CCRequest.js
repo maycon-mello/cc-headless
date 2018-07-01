@@ -1,5 +1,5 @@
 // @flow
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig, AxiosPromise } from 'axios';
 import qs from 'qs';
 import Context from './Context';
 
@@ -8,9 +8,18 @@ export interface CCRequestConfig extends AxiosRequestConfig {
   urlEncoded: ?boolean;
 }
 
-export default class CCRequest {
+/**
+ * @class CCRequest
+ * 
+ */
+class CCRequest {
   context: Context;
 
+  /**
+   * Create a CCRequest
+   * 
+   * @param {Context} context 
+   */
   constructor(context: Context) {
     this.context = context;
   }
@@ -44,7 +53,7 @@ export default class CCRequest {
     this.addHeaders(configs, headers);
   }
 
-  createRequest(props: CCRequestConfig) {
+  createRequest(props: CCRequestConfig):AxiosPromise {
     const { context } = this;
     const configs: AxiosRequestConfig  = {};
     const authToken = context.getAuthToken();
@@ -86,20 +95,33 @@ export default class CCRequest {
     return axios(configs);
   }
 
-  get(props: CCRequestConfig) {
+  /**
+   * Performs GET request
+   * @param {CCRequestConfig} props 
+   */
+  get(props: CCRequestConfig):AxiosPromise {
     return this.createRequest({
       method: 'get',
       ...props,
     });
   }
 
-  post(props: CCRequestConfig) {
+  /**
+   * Performs POST request
+   * @param {CCRequestConfig} props 
+   * @return {AxiosPromise} axios
+   */
+  post(props: CCRequestConfig):AxiosPromise {
     return this.createRequest({
       method: 'post',
       ...props,
     });
   }
 
+  /**
+   * Perform PUT request
+   * @param {CCRequestConfig} props 
+   */
   put(props: CCRequestConfig) {
     return this.createRequest({
       method: 'put',
@@ -107,6 +129,10 @@ export default class CCRequest {
     });
   }
 
+  /**
+   * Perform DELETE request
+   * @param {CCRequestConfig} props 
+   */
   delete(props: AxiosRequestConfig) {
     return this.createRequest({
       method: 'delete',
@@ -114,3 +140,5 @@ export default class CCRequest {
     });
   }
 }
+
+export default CCRequest;

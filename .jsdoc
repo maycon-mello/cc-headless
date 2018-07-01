@@ -1,0 +1,19 @@
+{
+    "source": {
+      "include": ["./src"],
+      "includePattern": ".+\\.js(doc|x)?$"
+    },
+    "opts": {
+      "destination": "./doc/",
+      "recurse": true
+    },
+    "plugins": ["node_modules/jsdoc-babel"],
+    "babel": {
+        "babelrc": false,
+        "extensions": ["js"],
+        "plugins": [
+          "transform-flow-strip-types",
+          "transform-object-rest-spread"
+        ]
+    }
+}
