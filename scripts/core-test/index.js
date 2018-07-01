@@ -25,8 +25,10 @@ async function test() {
 
     // get profile details
     // const profile = await profileService.getCurrent();
-    const order = await orderService.getById('130065');
-    console.log(order);
+    // const order = await orderService.getById('130065');
+    const order = await orderService.getCurrent();
+    
+    console.log(order.shoppingCart);
   } catch(ex) {
     console.log(ex);
     console.log(ex.response.data);

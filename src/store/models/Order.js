@@ -9,6 +9,7 @@ import PriceInfo from './PriceInfo';
 import DynamicProperty from './DynamicProperty';
 import PaymentGroup from './PaymentGroup';
 import ShippingGroup from './ShippingGroup';
+import ShoppingCart from './ShoppingCart';
 
 export type OrderConstructor = {
   id: string;
@@ -35,7 +36,7 @@ export type OrderConstructor = {
   dynamicProperties: Array<DynamicProperty>;
   payments: Array<PaymentGroup>;
   shippingGroups: Array<ShippingGroup>;
-  
+  shoppingCart: ShoppingCart;
 }
 
 export default class Order {
@@ -63,6 +64,7 @@ export default class Order {
   dynamicProperties: Array<DynamicProperty>;
   payments: Array<PaymentGroup>;
   shippingGroups: Array<ShippingGroup>;
+  shoppingCart: ShoppingCart;  
   rawResponse: Object;
 
   constructor(props: OrderConstructor) {
@@ -83,14 +85,14 @@ export default class Order {
     this.approvalSystemMessages = props.approvalSystemMessages;
     this.trackingInfo = props.trackingInfo;
     this.giftWithPurchaseOrderMarkers = props.giftWithPurchaseOrderMarkers;
-    this.billingAddress = new Address(props.billingAddress);
-    this.shippingAddress = new Address(props.shippingAddress);
-    this.taxPriceInfo = new TaxPriceInfo(props.taxPriceInfo);
+    this.billingAddress = props.billingAddress && new Address(props.billingAddress);
+    this.shippingAddress = props.shipingAddress && new Address(props.shippingAddress);
+    this.taxPriceInfo = props.taxPriceInfo && new TaxPriceInfo(props.taxPriceInfo);
     this.priceInfo = new PriceInfo(props.priceInfo);
     this.dynamicProperties = props.dynamicProperties.map(item => new DynamicProperty(item));
     this.payments = props.payments ? props.payments.map(item => new PaymentGroup(item)) : [];
     this.shippingGroups = props.shippingGroups.map(item => new ShippingGroup(item));
-
-    // this.rawResponse = props;
+    this.shoppingCart = props.shoppingCart && new ShoppingCart(props.shoppingCart);
+    this.rawResponse = props;
   }
 }
