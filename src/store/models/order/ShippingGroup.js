@@ -43,7 +43,7 @@ export default class ShippingGroup {
   rawResponse: Object;
 
   constructor(props: ShippingGroupConstructor) {
-    this.taxPriceInfo = new TaxPriceInfo(props.taxPriceInfo);
+    this.taxPriceInfo = props.taxPriceInfo && new TaxPriceInfo(props.taxPriceInfo);
     this.shippingMethod = new ShippingMethod(props.shippingMethod);
     this.shippingGroupId = props.shippingGroupId;
     this.type = props.type;

@@ -1,7 +1,9 @@
+// @flow
 import Context from '~/core/Context';
 import AuthService from '~/store/services/AuthService';
 import ProfileService from '~/store/services/ProfileService';
 import OrderService from '~/store/services/OrderService';
+import OrderRequest from '~/store/models/requests/OrderRequest';
 
 const context = new Context({
   envUrl: 'http://localhost:3000',
@@ -26,9 +28,14 @@ async function test() {
     // get profile details
     // const profile = await profileService.getCurrent();
     // const order = await orderService.getById('130065');
-    const order = await orderService.getCurrent();
+    let order = await orderService.getCurrent();
     
-    console.log(order.shoppingCart);
+
+    order.shoppingCart.items[0].quantity++;
+
+    let request = OrderRequest.createFromOrder(order, 'update');
+    order = await orderService.priceOrder(request);    
+    console.log(order.priceInfo);
   } catch(ex) {
     console.log(ex);
     console.log(ex.response.data);

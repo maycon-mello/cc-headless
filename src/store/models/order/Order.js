@@ -13,6 +13,7 @@ import ShoppingCart from './ShoppingCart';
 
 export type OrderConstructor = {
   id: string;
+  orderId: string;  
   creationTime: number;
   sourceSystem: string;
   orderStatus: string;
@@ -46,6 +47,7 @@ export type OrderConstructor = {
  */
 class Order {
   id: string;
+  orderId: string;
   creationTime: number;
   sourceSystem: string;
   orderStatus: string;
@@ -74,6 +76,7 @@ class Order {
 
   constructor(props: OrderConstructor) {
     this.id = props.id;
+    this.orderId = props.orderId;
     this.creationTime = props.creationTime;
     this.sourceSystem = props.sourceSystem;
     this.orderStatus = props.orderStatus;
@@ -86,7 +89,7 @@ class Order {
     this.orderLocale = props.orderLocale;    
     this.discountInfo = new DiscountInfo(props.discountInfo);
     this.priceListGroup = new PriceListGroup(props.priceListGroup);
-    this.shippingMethod = new ShippingMethod(props.shippingMethod);
+    this.shippingMethod = props.shippingMethod && new ShippingMethod(props.shippingMethod);
     this.approvalSystemMessages = props.approvalSystemMessages;
     this.trackingInfo = props.trackingInfo;
     this.giftWithPurchaseOrderMarkers = props.giftWithPurchaseOrderMarkers;
@@ -99,8 +102,8 @@ class Order {
     this.taxPriceInfo = props.taxPriceInfo && new TaxPriceInfo(props.taxPriceInfo);
     this.priceInfo = new PriceInfo(props.priceInfo);
     this.dynamicProperties = props.dynamicProperties.map(item => new DynamicProperty(item));
-    this.payments = props.payments ? props.payments.map(item => new PaymentGroup(item)) : [];
-    this.shippingGroups = props.shippingGroups.map(item => new ShippingGroup(item));
+    this.payments = props.payments && props.payments.map(item => new PaymentGroup(item));
+    this.shippingGroups = props.shippingGroups && props.shippingGroups.map(item => new ShippingGroup(item));
     this.shoppingCart = props.shoppingCart && new ShoppingCart(props.shoppingCart);
     this.rawResponse = props;
   }

@@ -2,7 +2,8 @@
 import Service from '~/core/Service';
 import OrderList from '../models/OrderList';
 import Order from '../models/order/Order';
-import OrderRequest from '../models/requests/OrderRequest';
+import PriceOrderRequest from '../models/requests/PriceOrderRequest';
+import UpdateCurrentOrderRequest from '../models/requests/UpdateCurrentOrderRequest';
 
 /**
  * Order Service
@@ -54,9 +55,14 @@ class OrderService extends Service {
    * @param {store.models.requests.OrderRequest} order
    * @return {store.models.Order} updated order
    */
-  async updateCurrentOrder(order: OrderRequest): Promise<Order> {
+  async updateCurrentOrder(order: UpdateCurrentOrderRequest | Order): Promise<Order> {
+    if (order instanceof Order) {
+      order = UpdateCurrentOrderRequest.createFromOrder(order);
+    }
+
     const { data } = await this.request.post({
       url: `/orders/current`,
+      data: order,
     });
 
     return new Order(data);
@@ -67,9 +73,14 @@ class OrderService extends Service {
    * @param {store.models.requests.OrderRequest} order
    * @return {store.models.Order} priced order
    */
-  async priceOrder(order: OrderRequest): Promise<Order> {
+  async priceOrder(order: PriceOrderRequest | Order): Promise<Order> {
+    if (order instanceof Order) {
+      order = PriceOrderRequest.createFromOrder(order);
+    }
+
     const { data } = await this.request.post({
       url: `/orders/price`,
+      data: order,
     });
 
     return new Order(data);
