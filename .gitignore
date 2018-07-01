@@ -38,3 +38,5 @@ benchmarks/graphs
 # Test Output
 /test/e2e/screenshots
 /.nyc_output
+
+/logs
