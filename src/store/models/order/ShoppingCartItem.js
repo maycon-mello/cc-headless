@@ -60,6 +60,7 @@ export default class ShoppingCartItem {
   id: string;
   taxCode: string;
   isItemValid: boolean;
+  rawResponse: Object;
 
   constructor(props: ShoppingCartItemConstructor) {
     this.primaryThumbImageURL = props.primaryThumbImageURL;
@@ -87,5 +88,6 @@ export default class ShoppingCartItem {
     this.id = props.id;
     this.giftWithPurchaseCommerceItemMarkers = props.giftWithPurchaseCommerceItemMarkers;
     this.taxCode = props.taxCode; // string;
+    this.rawResponse = props;
   }
 }

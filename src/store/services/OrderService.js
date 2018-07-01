@@ -2,6 +2,7 @@
 import Service from '~/core/Service';
 import OrderList from '../models/OrderList';
 import Order from '../models/order/Order';
+import OrderRequest from '../models/requests/OrderRequest';
 
 /**
  * Order Service
@@ -37,8 +38,8 @@ class OrderService extends Service {
   }
 
   /**
-   * Get current order for logged in profile
-   * @return {Promise.<store.models.Order>} current order
+   * Get Incomplete Order
+   * @return {Promise.<store.models.Order>} Returns incomplete order of the logged-in user
    */
   async getCurrent(): Promise<Order>{
     const { data } = await this.request.get({
@@ -46,6 +47,27 @@ class OrderService extends Service {
     });
 
     return new Order(data);
+  }
+
+  /**
+   * Update Current Profile Order. Updates the persisted order for the logged in user
+   * @param {store.models.requests.OrderRequest} order
+   * @return {store.models.Order} updated order
+   */
+  async updateCurrentOrder(order: OrderRequest): Promise<Order> {
+    const { data } = await this.request.post({
+      url: `/orders/current`,
+    });
+
+    return new Order(data);
+  }
+
+  async createOrder(order: Order) {
+
+  }
+
+  async priceOrder(order: Order) {
+
   }
 }
 

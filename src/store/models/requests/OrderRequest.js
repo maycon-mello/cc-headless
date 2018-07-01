@@ -4,7 +4,7 @@ import ShoppingCart from "../order/ShoppingCart";
 import PaymentGroup from "../order/PaymentGroup";
 
 /**
- * @typedef UpdateOrderRequestConstructor
+ * @typedef OrderRequestConstructor
  * @memberof store.models.requests
  * @type Object
  * @property {boolean} combineLineItems - Combine line items
@@ -15,7 +15,7 @@ import PaymentGroup from "../order/PaymentGroup";
  * @property {store.models.order.ShoppingCart} shoppingCart - Shopping cart
  * 
  */
-export type UpdateOrderRequestConstructor = {
+export type OrderRequestConstructor = {
   combineLineItems: boolean;
   id: string;
   op: string;
@@ -25,7 +25,7 @@ export type UpdateOrderRequestConstructor = {
 }
 
 /**
- * Update order request
+ * Order request
  * @memberof store.models.requests
  * @property {boolean} combineLineItems - Combine line items
  * @property {string} id - Order id
@@ -34,7 +34,7 @@ export type UpdateOrderRequestConstructor = {
  * @property {Array<store.models.order.ShippingGroup>} shippingGroups - Shipping groups
  * @property {store.models.order.ShoppingCart} shoppingCart - Shopping cart
  */
-class UpdateOrderRequest {
+class OrderRequest {
   combineLineItems: boolean;
   id: string;
   op: string;
@@ -43,10 +43,10 @@ class UpdateOrderRequest {
   shoppingCart: ShoppingCart;
 
   /**
-   * Create UpdateOrderRequest
-   * @param {store.models.requests.UpdateOrderRequestConstructor} props 
+   * Create OrderRequest
+   * @param {store.models.requests.OrderRequestConstructor} props 
    */
-  constructor(props: UpdateOrderRequest) {
+  constructor(props: OrderRequest) {
     this.combineLineItems = props.combineLineItems;
     this.id = props.id;
     this.op = props.op;
@@ -56,4 +56,4 @@ class UpdateOrderRequest {
   }
 }
 
-export default UpdateOrderRequest;
+export default OrderRequest;
