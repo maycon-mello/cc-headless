@@ -1,17 +1,25 @@
 // @flow
 
+/**
+ * @typedef BasicAuthProps
+ * @memberof core
+ * @type Object
+ * @property {string} username - Username
+ * @property {string} password - Password
+ */
 export type BasicAuthProps = {
   username: string;
   password: string;
 }
 
 /**
- * @typedef ContextProps
+ * @typedef ContextConstructor
+ * @memberof core
  * @type Object
  * @property {string} envUrl - Environment URL
  * @property {string} enableEnvAuth - Enable env auth
  */
-export type ContextProps = {
+export type ContextConstructor = {
   envUrl: string;
   enableEnvAuth: boolean;
   envAuth: BasicAuthProps;
@@ -21,6 +29,7 @@ export type ContextProps = {
 
 /**
  * Application context
+ * @memberof core
  */
 class Context {
   envUrl: string;
@@ -32,9 +41,9 @@ class Context {
 
   /**
    * Create context
-   * @param {ContextProps} props 
+   * @param {core.ContextConstructor} props 
    */
-  constructor(props: ContextProps) {
+  constructor(props: ContextConstructor) {
     this.envUrl = props.envUrl;
     this.enableEnvAuth = props.enableEnvAuth;
     this.envAuth = props.envAuth;
@@ -58,10 +67,17 @@ class Context {
     this.enableEnvAuth = enable;
   }
 
+  /**
+   * @return {core.BasicAuthProps} basic auth props
+   */
   getEnvAuth(): BasicAuthProps {
     return this.envAuth;
   }
 
+  /**
+   * Set env auth 
+   * @param {core.BasicAuthProps} props 
+   */
   setEnvAuth(props: BasicAuthProps) {
     this.envAuth = props;
   }

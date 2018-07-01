@@ -2,7 +2,11 @@
 import Service from '~/core/Service';
 import Profile from '../models/Profile';
 
-export default class ProfileService extends Service {
+/**
+ * Profile service
+ * @memberof store/services
+ */
+class ProfileService extends Service {
 
   async getCurrent(): Promise<Profile> {
     const { data } = await this.request.get({
@@ -12,3 +16,5 @@ export default class ProfileService extends Service {
     return new Profile(data);
   }
 }
+
+export default ProfileService;

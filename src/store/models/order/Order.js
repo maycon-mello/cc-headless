@@ -39,7 +39,12 @@ export type OrderConstructor = {
   shoppingCart: ShoppingCart;
 }
 
-export default class Order {
+
+/**
+ * Order class
+ * @memberof store.models
+ */
+class Order {
   id: string;
   creationTime: number;
   sourceSystem: string;
@@ -100,3 +105,5 @@ export default class Order {
     this.rawResponse = props;
   }
 }
+
+export default Order;

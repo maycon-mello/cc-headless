@@ -15,7 +15,7 @@ export type CCRequestConfig = {
 
 /**
  * @class CCRequest
- * 
+ * @memberof core
  */
 class CCRequest {
   context: Context;

@@ -1,6 +1,16 @@
 // @flow
 import type { Link } from '~/core/models/Link';
 
+/**
+ * @typedef CommonListConstructor
+ * @memberof store.models
+ * @property {number} total
+ * @property {number} totalResults
+ * @property {number} offset
+ * @property {number} offset
+ * @property {Array} links
+ * @property {Array<C>} items
+ */
 export interface CommonListConstructor<C> {
   total: number;
   totalResults: number;
@@ -10,7 +20,12 @@ export interface CommonListConstructor<C> {
   items: Array<C>;
 }
 
-export default class CommonList<T, C> {
+/**
+ * CommonList<T, C>
+ * 
+ * @memberof store.models
+ */
+class CommonList<T, C> {
   total: number;
   totalResults: number;
   offset: number;
@@ -24,3 +39,5 @@ export default class CommonList<T, C> {
     this.totalResults = props.totalResults; 
   }
 }
+
+export default CommonList;
