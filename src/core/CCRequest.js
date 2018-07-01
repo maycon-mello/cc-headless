@@ -94,7 +94,6 @@ class CCRequest {
   
     configs.url = this.resolveUrl(props.url);
     configs.method = props.method;
-
     console.log(configs);
 
     return axios(configs);

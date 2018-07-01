@@ -1,5 +1,5 @@
 // @flow
-import express from 'express';
+import express, { RequestHandler } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import proxyMiddleware from './proxyMiddleware';
@@ -23,6 +23,10 @@ export default class Proxy {
    */
   props: ProxyProps;
 
+  jsonParser: RequestHandler;
+
+  urlencodedParser: RequestHandler;
+
   /**
    * 
    * @param {ProxyProps} props 
@@ -30,11 +34,12 @@ export default class Proxy {
   constructor(props: ProxyProps) {
     const app = express();
 
-    app.use(bodyParser.urlencoded({
+    this.urlencodedParser = bodyParser.urlencoded({
       extended: false,
-    }));
+    });
 
-    app.use(bodyParser.json());
+    this.jsonParser = bodyParser.json();
+
     app.use(cors({
       credentials: true,
       origin: true,
@@ -52,36 +57,32 @@ export default class Proxy {
     return app.use.apply(app, arguments);
   }
 
-  /**
-   * 
-   */
-  get() {
-    const { app } = this;
-    return app.get.apply(app, arguments);
+  getRequestHandlers(handlers: Array<RequestHandler>): Array<RequestHandler> {
+    return [
+      this.jsonParser,
+      this.urlencodedParser,
+      ...handlers,
+    ];
   }
 
-  /**
-   * 
-   */
-  post() {
+  get(url: string, ...handlers: Array<RequestHandler>) {
     const { app } = this;
-    return app.post.apply(app, arguments);
+    return app.get(url, handlers);
   }
 
-  /**
-   * 
-   */
-  put() {
+  post(url: string, ...handlers: Array<RequestHandler>) {
     const { app } = this;
-    return app.put.apply(app, arguments);
+    return app.post(url, this.getRequestHandlers(handlers));
   }
 
-  /**
-   * 
-   */
-  options() {
+  put(url: string, ...handlers: Array<RequestHandler>) {
     const { app } = this;
-    return app.options.apply(app, arguments);
+    return app.put(url, this.getRequestHandlers(handlers));
+  }
+
+  options(url: string, ...handlers: Array<RequestHandler>) {
+    const { app } = this;
+    return app.options(url, handlers);
   }
 
   /**
@@ -92,7 +93,7 @@ export default class Proxy {
     const { port } = props;
 
     app.use(proxyMiddleware(props));
-
+   
     app.listen(port, () => {
       console.log(`Proxy listening on port ${port}`)
     });
