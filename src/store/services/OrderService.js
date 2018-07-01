@@ -62,12 +62,17 @@ class OrderService extends Service {
     return new Order(data);
   }
 
-  async createOrder(order: Order) {
+  /**
+   * Price an orer
+   * @param {store.models.requests.OrderRequest} order
+   * @return {store.models.Order} priced order
+   */
+  async priceOrder(order: OrderRequest): Promise<Order> {
+    const { data } = await this.request.post({
+      url: `/orders/price`,
+    });
 
-  }
-
-  async priceOrder(order: Order) {
-
+    return new Order(data);
   }
 }
 

@@ -13,7 +13,7 @@ import PaymentGroup from "../order/PaymentGroup";
  * @property {Array<store.models.order.PaymentGroup>} payments - Payment groups
  * @property {Array<store.models.order.ShippingGroup>} shippingGroups - Shipping groups
  * @property {store.models.order.ShoppingCart} shoppingCart - Shopping cart
- * 
+ * @property {boolean} reprice - Currently this flag is used in combination with orderId parameter. If flag is true orderId is mandatory. Used only for orders in pending approval state.
  */
 export type OrderRequestConstructor = {
   combineLineItems: boolean;
@@ -22,6 +22,7 @@ export type OrderRequestConstructor = {
   payments: Array<PaymentGroup>;
   shippingGroups: Array<ShippingGroup>;
   shoppingCart: ShoppingCart;
+  reprice?: boolean;
 }
 
 /**
@@ -33,6 +34,7 @@ export type OrderRequestConstructor = {
  * @property {Array<store.models.order.PaymentGroup>} payments - Payment groups
  * @property {Array<store.models.order.ShippingGroup>} shippingGroups - Shipping groups
  * @property {store.models.order.ShoppingCart} shoppingCart - Shopping cart
+ * @property {boolean} reprice - Currently this flag is used in combination with orderId parameter. If flag is true orderId is mandatory. Used only for orders in pending approval state.
  */
 class OrderRequest {
   combineLineItems: boolean;
@@ -41,6 +43,7 @@ class OrderRequest {
   payments: Array<PaymentGroup>;
   shippingGroups: Array<ShippingGroup>;
   shoppingCart: ShoppingCart;
+  reprice: boolean;
 
   /**
    * Create OrderRequest
@@ -53,6 +56,7 @@ class OrderRequest {
     this.payments = (props.payments || []).map(item => new PaymentGroup(item));
     this.shippingGroups = (props.shippingGroups || []).map(item => new ShippingGroup(item));
     this.shoppingCart = new ShoppingCart(props.shoppingCart);
+    this.reprice = props.reprice;
   }
 }
 
