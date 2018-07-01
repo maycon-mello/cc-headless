@@ -1,0 +1,15 @@
+{
+    "presets": ["env", "stage-0"],
+    "plugins": [
+      "transform-flow-strip-types",
+      [
+        "module-resolver",
+        {
+          "alias": {
+            "~": "/home/maycon/oe/cc-headless/src"
+          }
+        }
+      ]
+    ]
+  }
+  

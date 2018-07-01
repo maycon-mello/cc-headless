@@ -1,0 +1,62 @@
+{
+    "extends": "airbnb-base",
+    "plugins": [
+        "mocha",
+        "react",
+        "chai-friendly"
+    ],
+    "env": {
+        "node": true,
+        "es6": true
+    },
+    "globals": {
+        "expect": true,
+        "it": true,
+        "describe": true,
+        "sinon": true,
+        "before": true,
+        "beforeEach": true,
+        "after": true,
+        "afterEach": true,
+        "document": true,
+        "window": true,
+        "event": true,
+        "browser": true,
+        "ENV": true
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaVersion": 2017,
+        "ecmaFeatures": {
+            "jsx": true,
+            "modules": true
+        }
+    },
+    "rules": {
+        "react/no-unused-prop-types": "error",
+        "import/no-extraneous-dependencies": "off",
+        "no-console": "error",
+        "class-methods-use-this": ["error", {"exceptMethods": ["render"]}],
+        "global-require": "off",
+        "linebreak-style": "off",
+        "max-len": ["error", 160],
+        "import/no-unresolved": "off",
+        "import/extensions": ["error", "never"],
+        "indent": ["error", 2],
+        "react/jsx-no-bind": ["error", {"allowArrowFunctions": true}],
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
+        "react/prop-types": "error",
+        "func-names": ["error", "as-needed"],
+        "comma-dangle": ["error", "always-multiline"],
+        "object-curly-newline": ["error", {"multiline": true, "consistent": true}],
+        "object-property-newline": "error",
+        "object-shorthand": ["error", "consistent"],
+        "no-unused-expressions": "off",
+        "chai-friendly/no-unused-expressions": "error",
+        "prefer-arrow-callback": "error",
+        "jsx-quotes": "error"
+    }
+  }
+  
