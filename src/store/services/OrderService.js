@@ -1,7 +1,7 @@
 // @flow
 import Service from '~/core/Service';
 import OrderList from '../models/OrderList';
-import Order from '../models/Order';
+import Order from '../models/order/Order';
 
 export default class OrderService extends Service {
   async getList(): Promise<OrderList>{

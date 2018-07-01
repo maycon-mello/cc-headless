@@ -3,10 +3,10 @@
 import PriceListGroup from './PriceListGroup';
 import DiscountInfo from './DiscountInfo';
 import ShippingMethod from './ShippingMethod';
-import Address from './Address';
+import Address from '../Address';
 import TaxPriceInfo from './TaxPriceInfo';
 import PriceInfo from './PriceInfo';
-import DynamicProperty from './DynamicProperty';
+import DynamicProperty from '../DynamicProperty';
 import PaymentGroup from './PaymentGroup';
 import ShippingGroup from './ShippingGroup';
 import ShoppingCart from './ShoppingCart';
@@ -86,7 +86,11 @@ export default class Order {
     this.trackingInfo = props.trackingInfo;
     this.giftWithPurchaseOrderMarkers = props.giftWithPurchaseOrderMarkers;
     this.billingAddress = props.billingAddress && new Address(props.billingAddress);
-    this.shippingAddress = props.shipingAddress && new Address(props.shippingAddress);
+
+    if (props.shippingAddress) { 
+      this.shippingAddress = new Address(props.shippingAddress);
+    }
+
     this.taxPriceInfo = props.taxPriceInfo && new TaxPriceInfo(props.taxPriceInfo);
     this.priceInfo = new PriceInfo(props.priceInfo);
     this.dynamicProperties = props.dynamicProperties.map(item => new DynamicProperty(item));

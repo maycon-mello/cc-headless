@@ -1,5 +1,5 @@
 // @flow
-import DynamicProperty from './DynamicProperty';
+import DynamicProperty from '../DynamicProperty';
 import CommerceItemPriceInfo from './CommerceItemPriceInfo';
 import SkuProperty from './SkuProperty';
 import DiscountInfo from './DiscountInfo';

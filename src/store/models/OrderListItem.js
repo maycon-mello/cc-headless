@@ -1,6 +1,6 @@
 // @flow
 import DynamicProperty from "./DynamicProperty";
-import PriceListGroup from "./PriceListGroup";
+import PriceListGroup from "./order/PriceListGroup";
 
 export type OrderListItemConstructor = {
   orderId: string;

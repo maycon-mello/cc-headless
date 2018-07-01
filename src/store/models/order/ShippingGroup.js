@@ -1,5 +1,5 @@
 // @flow
-import Address from './Address';
+import Address from '../Address';
 import TaxPriceInfo from './TaxPriceInfo';
 import ShippingMethod from './ShippingMethod';
 import PriceInfo from './PriceInfo';

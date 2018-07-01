@@ -1,7 +1,7 @@
 // @flow
 import Currency from "./Currency";
 import type { CurrencyConstructor } from './Currency';
-import type { EntityRef } from './EntityRef';
+import type { EntityRef } from '../EntityRef';
 
 export type PriceListGroupConstructor = {
   id: string;

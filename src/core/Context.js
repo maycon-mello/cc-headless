@@ -5,6 +5,12 @@ export type BasicAuthProps = {
   password: string;
 }
 
+/**
+ * @typedef ContextProps
+ * @type Object
+ * @property {string} envUrl - Environment URL
+ * @property {string} enableEnvAuth - Enable env auth
+ */
 export type ContextProps = {
   envUrl: string;
   enableEnvAuth: boolean;
@@ -17,22 +23,17 @@ export type ContextProps = {
  * Application context
  */
 class Context {
-  /**
-   * Env url
-   * Eg.: https://ccstore-<env>.oracleoutsourcing.com
-   */
   envUrl: string;
   enableEnvAuth: boolean;
   envAuth: BasicAuthProps;
   authToken: string;
   applicationKey: string;
-
-  /**
-   * Api basePath
-   * Eg.: /ccadmin/v1
-   */
   basePath: string;
 
+  /**
+   * Create context
+   * @param {ContextProps} props 
+   */
   constructor(props: ContextProps) {
     this.envUrl = props.envUrl;
     this.enableEnvAuth = props.enableEnvAuth;
@@ -65,10 +66,19 @@ class Context {
     this.envAuth = props;
   }
 
+  /**
+   * Environment url
+   * 
+   * @return {string}
+   */
   getEnvUrl(): string {
     return this.envUrl;
   }
 
+  /**
+   * Set environment URL
+   * @param {string} url - Ex.: https://ccstore-{env}.oracleoutsourcing.com 
+   */
   setEnvUrl(url: string) {
     this.envUrl = url;
   }

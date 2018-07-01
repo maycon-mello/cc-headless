@@ -1,11 +1,16 @@
 // @flow
-import axios, { AxiosRequestConfig, AxiosPromise } from 'axios';
+import axios, { AxiosRequestConfig, AxiosPromise, AxiosBasicCredentials } from 'axios';
 import qs from 'qs';
 import Context from './Context';
 
-export interface CCRequestConfig extends AxiosRequestConfig {
-  public: ?boolean;
-  urlEncoded: ?boolean;
+export type CCRequestConfig = {
+  url: string;
+  method?: string;
+  headers?: any;
+  data?: any;
+  timeout?: number;
+  withCredentials?: boolean;
+  auth?: AxiosBasicCredentials;
 }
 
 /**

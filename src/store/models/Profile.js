@@ -2,7 +2,7 @@
 import type { EntityRef } from './EntityRef';
 import DynamicProperty from './DynamicProperty';
 import Address from './Address';
-import PriceListGroup from './PriceListGroup';
+import PriceListGroup from './order/PriceListGroup';
 
 // TODO: Api test on occ apis, to ensure the attributes didn't change
 export type OccProfileResponse = {
