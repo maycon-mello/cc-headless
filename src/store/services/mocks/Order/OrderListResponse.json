@@ -1,0 +1,92 @@
+{
+  "total": 6,
+  "totalResults": 6,
+  "offset": 0,
+  "limit": 250,
+  "links": [
+    {
+      "rel": "self",
+      "href": "http://localhost:3000:443/ccstore/v1/orders"
+    }
+  ],
+  "items": [
+    {
+      "cost": 0.0,
+      "orderId": "130065",
+      "lastModifiedDate": "2018-06-19T22:10:35.000Z",
+      "approvalSystemMessages": [],
+      "dynamicProperties": [
+        {
+          "value": "Not Provided",
+          "id": "fullAddress",
+          "label": "Subject Property"
+        },
+        {
+          "value": 1.0,
+          "id": "numberOfReports",
+          "label": "# of Reports"
+        },
+        {
+          "value": "Reports not found: Property Details",
+          "id": "errorMessage",
+          "label": "Error Message"
+        },
+        {
+          "value": null,
+          "id": "hiddenCampaignID",
+          "label": "WebTrends Hidden Campaign ID"
+        },
+        {
+          "value": "reportMissing",
+          "id": "errorCode",
+          "label": "Error Code"
+        }
+      ],
+      "shippingSurchargeValue": 0.0,
+      "priceListGroup": {
+        "isTaxIncluded": false,
+        "endDate": null,
+        "displayName": "Default Price Group",
+        "listPriceList": {
+          "repositoryId": "listPrices"
+        },
+        "active": true,
+        "isPointsBased": false,
+        "locale": "en_US",
+        "shippingSurchargePriceList": {
+          "repositoryId": "shippingSurchargePrices"
+        },
+        "deleted": false,
+        "taxCalculationType": null,
+        "repositoryId": "defaultPriceGroup",
+        "salePriceList": {
+          "repositoryId": "salePrices"
+        },
+        "currency": {
+          "currencyType": null,
+          "symbol": "$",
+          "deleted": false,
+          "displayName": "US Dollar",
+          "repositoryId": "en_US",
+          "fractionalDigits": 2,
+          "currencyCode": "USD",
+          "numericCode": "840"
+        },
+        "id": "defaultPriceGroup",
+        "includeAllProducts": true,
+        "startDate": null
+      },
+      "tax": 0.0,
+      "subTotal": 15.0,
+      "creationDate": "2018-06-19T22:10:16.000Z",
+      "submittedDate": "2018-06-19T22:10:18.000Z",
+      "totalWithoutTax": 15.0,
+      "total": 15.0,
+      "siteId": "siteUS",
+      "state": "REMOVED",
+      "currencyCode": "USD",
+      "stateDetailsAsUser": "Removed",
+      "status": "Removed"
+    }
+  ]
+}

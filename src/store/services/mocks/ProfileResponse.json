@@ -1,0 +1,212 @@
+{
+  "lastName": "Mello",
+  "firstName": "Maycon",
+  "login": "maycon.mello@objectedge.com",
+  "locale": "en",
+  "numberOfOrders": 2,
+  "gender": "female",
+  "repositoryId": "1540231",
+  "id": "1540231",
+  "email": "maycon.mello@objectedge.com",
+  "lastPurchaseDate": "2018-06-19T22:10:16.000Z",
+  "firstPurchaseDate": "2018-06-19T21:03:20.000Z",
+  "registrationDate": "2018-06-18T18:03:00.000Z",
+  "lastVisitDate": "2018-06-28T02:38:17.738Z",
+  "previousVisitDate": "2018-06-25T13:55:21.000Z",
+  "firstVisitDate": "2018-06-19T20:49:26.000Z",
+  "receiveEmail": "no",
+  "lifetimeAOV": 10.0,
+  "lifetimeSpend": 20.0,
+  "lastPurchaseAmount": 15.0,
+  "catalog": {
+    "repositoryId": "cloudCatalog"
+  },
+
+
+
+  "GDPRProfileP13nConsentDate": null,
+  "GDPRProfileP13nConsentGranted": false,
+
+  "dynamicProperties": [
+    {
+      "uiEditorType": "shortText",
+      "default": null,
+      "length": null,
+      "id": "role",
+      "label": "Role",
+      "type": "string",
+      "value": null,
+      "required": false
+    },
+    {
+      "uiEditorType": "shortText",
+      "default": null,
+      "length": null,
+      "id": "company",
+      "label": "Company",
+      "type": "string",
+      "value": null,
+      "required": false
+    },
+    {
+      "uiEditorType": "shortText",
+      "default": null,
+      "length": null,
+      "id": "clAuthId",
+      "label": "CL-Auth ID",
+      "type": "string",
+      "value": null,
+      "required": false
+    }
+  ],
+  "roles": [],
+  "secondaryAddresses": {
+    "Test": {
+      "country": "US",
+      "lastName": "Mellos",
+      "address3": null,
+      "city": "San Francisco",
+      "address2": null,
+      "prefix": null,
+      "address1": "201 Spear street",
+      "postalCode": "94105",
+      "jobTitle": null,
+      "companyName": null,
+      "county": null,
+      "suffix": null,
+      "firstName": "Maycon",
+      "phoneNumber": "1234567",
+      "repositoryId": "1540248",
+      "faxNumber": null,
+      "middleName": null,
+      "state": "CA"
+    },
+    "Test2": {
+      "country": "US",
+      "lastName": "Mello",
+      "address3": null,
+      "city": "San Francisco",
+      "address2": null,
+      "prefix": null,
+      "address1": "202 Spear street",
+      "postalCode": "94104",
+      "jobTitle": null,
+      "companyName": null,
+      "county": null,
+      "suffix": null,
+      "firstName": "Maycon",
+      "phoneNumber": "123454",
+      "repositoryId": "1540485",
+      "faxNumber": null,
+      "middleName": null,
+      "state": "CA"
+    }
+  },
+  "priceListGroup": {
+    "isTaxIncluded": false,
+    "endDate": null,
+    "displayName": "Default Price Group",
+    "listPriceList": {
+      "repositoryId": "listPrices"
+    },
+    "active": true,
+    "isPointsBased": false,
+    "locale": "en_US",
+    "shippingSurchargePriceList": {
+      "repositoryId": "shippingSurchargePrices"
+    },
+    "deleted": false,
+    "taxCalculationType": null,
+    "repositoryId": "defaultPriceGroup",
+    "salePriceList": {
+      "repositoryId": "salePrices"
+    },
+    "currency": {
+      "repositoryId": "en_US"
+    },
+    "id": "defaultPriceGroup",
+    "includeAllProducts": true,
+    "startDate": null
+  },
+  
+  "parentOrganization": null,
+  "receiveEmailDate": null,
+  
+  "loyaltyPrograms": [],
+  
+
+
+  "links": [
+    {
+      "rel": "self",
+      "href": "http://localhost:3000:443/ccstore/v1/profiles/current"
+    }
+  ],
+
+
+
+  "daytimeTelephoneNumber": null,
+  "derivedOrderPriceLimit": null,
+  "contactBillingAddress": null,
+
+
+  "dateOfBirth": null,
+  "contactShippingAddress": null,
+
+  "derivedApprovalRequired": false,
+  "lifetimeCurrencyCode": null,
+
+  "shippingAddress": null,
+  
+  "currentOrganization": null,
+  "secondaryOrganizations": [],
+
+  "shippingAddresses": [
+    {
+      "country": "US",
+      "lastName": "Mellos",
+      "address3": null,
+      "city": "San Francisco",
+      "address2": null,
+      "prefix": null,
+      "address1": "201 Spear street",
+      "postalCode": "94105",
+      "jobTitle": null,
+      "companyName": null,
+      "regionName": "California",
+      "county": null,
+      "suffix": null,
+      "firstName": "Maycon",
+      "phoneNumber": "1234567",
+      "repositoryId": "1540248",
+      "faxNumber": null,
+      "alias": "Test",
+      "middleName": null,
+      "state": "CA",
+      "countryName": "United States"
+    },
+    {
+      "country": "US",
+      "lastName": "Mello",
+      "address3": null,
+      "city": "San Francisco",
+      "address2": null,
+      "prefix": null,
+      "address1": "202 Spear street",
+      "postalCode": "94104",
+      "jobTitle": null,
+      "companyName": null,
+      "regionName": "California",
+      "county": null,
+      "suffix": null,
+      "firstName": "Maycon",
+      "phoneNumber": "123454",
+      "repositoryId": "1540485",
+      "faxNumber": null,
+      "alias": "Test2",
+      "middleName": null,
+      "state": "CA",
+      "countryName": "United States"
+    }
+  ]
+}
