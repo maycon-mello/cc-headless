@@ -8,6 +8,7 @@ import TaxPriceInfo from './TaxPriceInfo';
 import PriceInfo from './PriceInfo';
 import DynamicProperty from './DynamicProperty';
 import PaymentGroup from './PaymentGroup';
+import ShippingGroup from './ShippingGroup';
 
 export type OrderConstructor = {
   id: string;
@@ -33,6 +34,8 @@ export type OrderConstructor = {
   priceInfo: PriceInfo;
   dynamicProperties: Array<DynamicProperty>;
   payments: Array<PaymentGroup>;
+  shippingGroups: Array<ShippingGroup>;
+  
 }
 
 export default class Order {
@@ -59,6 +62,7 @@ export default class Order {
   priceInfo: PriceInfo;
   dynamicProperties: Array<DynamicProperty>;
   payments: Array<PaymentGroup>;
+  shippingGroups: Array<ShippingGroup>;
   rawResponse: Object;
 
   constructor(props: OrderConstructor) {
@@ -85,6 +89,8 @@ export default class Order {
     this.priceInfo = new PriceInfo(props.priceInfo);
     this.dynamicProperties = props.dynamicProperties.map(item => new DynamicProperty(item));
     this.payments = props.payments ? props.payments.map(item => new PaymentGroup(item)) : [];
+    this.shippingGroups = props.shippingGroups.map(item => new ShippingGroup(item));
+
     // this.rawResponse = props;
   }
 }

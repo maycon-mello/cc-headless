@@ -3,7 +3,6 @@ import AuthService from '~/store/services/AuthService';
 import ProfileService from '~/store/services/ProfileService';
 import OrderService from '~/store/services/OrderService';
 
-
 const context = new Context({
   envUrl: 'http://localhost:3000',
   basePath: '/ccstore/v1',
