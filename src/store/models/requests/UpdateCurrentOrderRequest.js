@@ -35,6 +35,7 @@ export type UpdateCurrentOrderRequestConstructor = {
 class UpdateCurrentOrderRequest extends OrderRequest {
   id: string;
   op: string;
+  reprice: ?boolean;
 
   /**
    * Create OrderRequest
@@ -51,15 +52,12 @@ class UpdateCurrentOrderRequest extends OrderRequest {
    * 
    * @param {store.models.Order} order 
    * @param {store.models.requests.UpdateCurrentOrderRequestConstructor} options 
-   * @example
-   * 
-   * UpdateCurrentOrderRequest.createFromOrder(order, {
-   *   op: 'update',
-   * })
    */
   static createFromOrder(order: Order, options: ?UpdateCurrentOrderRequestConstructor) {
     const props = {
       id: order.orderId || order.id,
+      payment: order.payments,
+      shippingGroups: order.shippingGroups,
       shoppingCart: order.shoppingCart,
       combineLineItems: 'yes',
       ...options,

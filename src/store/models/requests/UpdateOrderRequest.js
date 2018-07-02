@@ -6,57 +6,55 @@ import Order from '../order/Order';
 import OrderRequest from './OrderRequest';
 
 /**
- * @typedef PriceOrderRequestConstructor
+ * @typedef UpdateOrderRequestConstructor
+ * @extends store.models.requests.OrderRequestConstructor
  * @memberof store.models.requests
  * @type Object
- * @property {boolean} combineLineItems - Combine line items
  * @property {string} orderId - Order id 
- * @property {Array<store.models.order.PaymentGroup>} payments - Payment groups
- * @property {Array<store.models.order.ShippingGroup>} shippingGroups - Shipping groups
- * @property {store.models.order.ShoppingCart} shoppingCart - Shopping cart
  * @property {boolean} reprice - Currently this flag is used in combination with orderId parameter. If flag is true orderId is mandatory. Used only for orders in pending approval state.
+ * @inheritdoc
  */
-export type PriceOrderRequestConstructor = {
+export type UpdateOrderRequestConstructor = {
   combineLineItems: string;
-  orderId: string;  
+  id: string;
+  op: string;  
   payments?: Array<PaymentGroup>;
   shippingGroups?: Array<ShippingGroup>;
   shoppingCart: ShoppingCart;
   reprice?: boolean;
-  isAnonymousCheckout?: boolean; 
 }
 
 /**
  * Price Order request
  * @memberof store.models.requests
  * @extends store.models.requests.OrderRequest
- * @property {boolean} combineLineItems - Combine line items
  * @property {string} orderId - Order id
- * @property {Array<store.models.order.PaymentGroup>} payments - Payment groups
- * @property {Array<store.models.order.ShippingGroup>} shippingGroups - Shipping groups
- * @property {store.models.order.ShoppingCart} shoppingCart - Shopping cart
  * @property {boolean} reprice - Currently this flag is used in combination with orderId parameter. If flag is true orderId is mandatory. Used only for orders in pending approval state.
+ * @inheritdoc
  */
-class PriceOrderRequest extends OrderRequest {
-  orderId: string;
-  reprice: ?boolean;
-  isAnonymousCheckout: ?boolean;
+class UpdateOrderRequest extends OrderRequest {
+  id: string;
+  op: string;
+  reprice: ?boolean;  
 
   /**
    * Create OrderRequest
-   * @param {store.models.requests.OrderRequestConstructor} props 
+   * @param {store.models.requests.UpdateOrderRequestConstructor} props 
    */
-  constructor(props: PriceOrderRequestConstructor) {
+  constructor(props: UpdateOrderRequestConstructor) {
     super(props);
-
-    this.orderId = props.orderId;
+    this.id = props.id;
     this.reprice = props.reprice;
-    this.isAnonymousCheckout = props.isAnonymousCheckout;
   }
 
-  static createFromOrder(order: Order, options: ?PriceOrderRequestConstructor) {
+  /**
+   * 
+   * @param {store.models.Order} order 
+   * @param {store.models.requests.UpdateOrderRequestConstructor} options
+   */
+  static createFromOrder(order: Order, options: ?UpdateOrderRequestConstructor) {
     const props = {
-      orderId: order.orderId,
+      id: order.orderId || order.id,
       payment: order.payments,
       shippingGroups: order.shippingGroups,
       shoppingCart: order.shoppingCart,
@@ -64,8 +62,8 @@ class PriceOrderRequest extends OrderRequest {
       ...options,
     }
 
-    return new PriceOrderRequest(props);
+    return new UpdateOrderRequest(props);
   }
 }
 
-export default PriceOrderRequest;
+export default UpdateOrderRequest;

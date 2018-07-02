@@ -58,7 +58,7 @@ class CCRequest {
     this.addHeaders(configs, headers);
   }
 
-  createRequest(props: CCRequestConfig):AxiosPromise {
+  async createRequest(props: CCRequestConfig):AxiosPromise {
     const { context } = this;
     const configs: AxiosRequestConfig  = {};
     const authToken = context.getAuthToken();
@@ -94,9 +94,12 @@ class CCRequest {
   
     configs.url = this.resolveUrl(props.url);
     configs.method = props.method;
-    console.log(configs);
 
-    return axios(configs);
+    try {
+      return await axios(configs);
+    } catch(err) {
+      throw err.response.data;
+    }
   }
 
   /**

@@ -1,13 +1,13 @@
 // @flow
-import Context from '~/core/Context';
+import Context from '~/store/core/StoreContext';
 import AuthService from '~/store/services/AuthService';
 import ProfileService from '~/store/services/ProfileService';
 import OrderService from '~/store/services/OrderService';
 import OrderRequest from '~/store/models/requests/OrderRequest';
+import OrderBuilder from '~/store/OrderBuilder';
 
 const context = new Context({
   envUrl: 'http://localhost:3000',
-  basePath: '/ccstore/v1',
   enableEnvAuth: true,
   envAuth: {
     username: 'admin',
@@ -28,17 +28,30 @@ async function test() {
     // get profile details
     // const profile = await profileService.getCurrent();
     // const order = await orderService.getById('130065');
-    let order = await orderService.getCurrent();
+    // let order = await orderService.getCurrent();
+
+    // order.shoppingCart.items[0].quantity++;
+
+    // order = await orderService.priceOrder(order);    
+    // console.log(order.priceInfo);
+
+    const builder = await OrderBuilder.create(context, false);
     
+    console.log(builder.getOrder().shoppingCart.items[0].quantity);
+    
+    builder.getOrder().shoppingCart.addItem({
+      quantity: 1,
+      skuId: 'IQ2RPQ',
+      productId: 'IQ2RPQ',
+    });
 
-    order.shoppingCart.items[0].quantity++;
+    await builder.refresh();
 
-    let request = OrderRequest.createFromOrder(order, 'update');
-    order = await orderService.priceOrder(request);    
-    console.log(order.priceInfo);
-  } catch(ex) {
-    console.log(ex);
-    console.log(ex.response.data);
+    console.log(builder.getOrder().priceInfo);
+
+  } catch(err) {
+    console.log(err);
+    // console.log(ex.response.data);
   }
 }
 

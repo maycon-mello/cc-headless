@@ -60,4 +60,30 @@ export default class ShippingGroup {
     this.status = props.status;
     this.rawResponse = props;
   }
+
+  static isValid(shippingGroup: ShippingGroup) {
+    let address: Address = shippingGroup.shippingAddress;
+
+    if (!address) {
+      return false;
+    }
+
+    if (!address.address1) {
+      return false;
+    }
+
+    if (!address.firstName && !address.lastName && !address.companyName) {
+      return false;
+    }
+
+    if (!address.state) {
+      return false;
+    }
+
+    if (!address.city) {
+      return false;
+    }
+
+    return true;
+  }
 }

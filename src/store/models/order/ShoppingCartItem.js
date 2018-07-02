@@ -5,6 +5,11 @@ import SkuProperty from './SkuProperty';
 import DiscountInfo from './DiscountInfo';
 
 export type ShoppingCartItemConstructor = {
+  catRefId: string;
+  skuId: string;
+  quantity: number;
+  productId: string;
+
   primaryThumbImageURL: string;
   rawTotalPrice: number;
   dynamicProperties: Array<DynamicProperty>;
@@ -16,12 +21,9 @@ export type ShoppingCartItemConstructor = {
   variant: Array<Object>;
   onSale: boolean;
   unitPrice: number;
-  amount: number;
-  quantity: number;
-  productId: string;
+  amount?: number;
   salePrice: number;
   detailedItemPriceInfo: Array<CommerceItemPriceInfo>;
-  catRefId: string;
   skuProperties: Array<SkuProperty>;
   discountInfo: Array<DiscountInfo>;
   shopperInput: Object;
@@ -34,6 +36,9 @@ export type ShoppingCartItemConstructor = {
 }
 
 export default class ShoppingCartItem {
+  skuId: string;
+  catRefId: string;
+  quantity: number;
   primaryThumbImageURL: string;
   rawTotalPrice: number;
   dynamicProperties: Array<DynamicProperty>;
@@ -46,11 +51,9 @@ export default class ShoppingCartItem {
   onSale: boolean;
   unitPrice: number;
   amount: number;
-  quantity: number;
   productId: string;
   salePrice: number;
   detailedItemPriceInfo: Array<CommerceItemPriceInfo>;
-  catRefId: string;
   skuProperties: Array<SkuProperty>;
   discountInfo: Array<DiscountInfo>;
   shopperInput: Object;
@@ -78,7 +81,8 @@ export default class ShoppingCartItem {
     this.productId = props.productId;
     this.salePrice = props.salePrice;
     this.detailedItemPriceInfo = (props.detailedItemPriceInfo || []).map(item => new CommerceItemPriceInfo(item));
-    this.catRefId = props.catRefId;
+    this.catRefId = props.catRefId || props.skuId;
+    this.skuId = props.catRefId || props.skuId;
     this.skuProperties = (props.skuProperties || []).map(item => new SkuProperty(item));
     this.discountInfo = (props.discountInfo || []).map(item => new DiscountInfo(item));
     this.shopperInput = props.shopperInput;

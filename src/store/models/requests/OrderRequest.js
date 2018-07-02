@@ -19,7 +19,6 @@ export type OrderRequestConstructor = {
   payments?: Array<PaymentGroup>;
   shippingGroups?: Array<ShippingGroup>;
   shoppingCart: ShoppingCart;
-  reprice?: boolean;
 }
 
 /**
@@ -36,7 +35,6 @@ class OrderRequest {
   payments: ?Array<PaymentGroup>;
   shippingGroups: ?Array<ShippingGroup>;
   shoppingCart: ShoppingCart;
-  reprice: ?boolean;
 
   /**
    * Create OrderRequest
@@ -44,10 +42,18 @@ class OrderRequest {
    */
   constructor(props: OrderRequestConstructor) {
     this.combineLineItems = props.combineLineItems;
-    this.payments = props.payments && props.payments.map(item => new PaymentGroup(item));
-    this.shippingGroups = props.shippingGroups && props.shippingGroups.map(item => new ShippingGroup(item));
+    this.payments = props.payments ? props.payments.map(item => new PaymentGroup(item)) : [];
+    const shippingGroups = (props.shippingGroups || [])
+      .map(item => new ShippingGroup(item))
+      .filter(ShippingGroup.isValid);
+
+    if (shippingGroups.length > 0) {
+      this.shippingGroups = shippingGroups;
+    }
+
     this.shoppingCart = new ShoppingCart(props.shoppingCart);
-    this.reprice = props.reprice;
+
+    console.log(props.shippingGroups);
   }
 }
 

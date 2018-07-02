@@ -21,10 +21,10 @@ export type BasicAuthProps = {
  */
 export type ContextConstructor = {
   envUrl: string;
-  enableEnvAuth: boolean;
-  envAuth: BasicAuthProps;
-  applicationKey: string;
-  basePath: string;
+  enableEnvAuth?: boolean;
+  envAuth?: BasicAuthProps;
+  applicationKey?: string;
+  basePath?: string;
 }
 
 /**
@@ -34,9 +34,9 @@ export type ContextConstructor = {
 class Context {
   envUrl: string;
   enableEnvAuth: boolean;
-  envAuth: BasicAuthProps;
-  authToken: string;
-  applicationKey: string;
+  envAuth: ?BasicAuthProps;
+  authToken: ?string;
+  applicationKey: ?string;
   basePath: string;
 
   /**
@@ -45,13 +45,13 @@ class Context {
    */
   constructor(props: ContextConstructor) {
     this.envUrl = props.envUrl;
-    this.enableEnvAuth = props.enableEnvAuth;
+    this.enableEnvAuth = props.enableEnvAuth || false;
     this.envAuth = props.envAuth;
     this.applicationKey = props.applicationKey;
-    this.basePath = props.basePath;
+    this.basePath = props.basePath || '';
   }
 
-  getAuthToken(): string {
+  getAuthToken(): ?string {
     return this.authToken;
   }
 
@@ -70,7 +70,7 @@ class Context {
   /**
    * @return {core.BasicAuthProps} basic auth props
    */
-  getEnvAuth(): BasicAuthProps {
+  getEnvAuth(): ?BasicAuthProps {
     return this.envAuth;
   }
 
@@ -103,7 +103,7 @@ class Context {
    * Get base path value
    * @return {string} base path
    */
-  getBasePath(): string {
+  getBasePath(): ?string {
     return this.basePath;
   }
 
