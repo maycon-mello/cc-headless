@@ -56,7 +56,9 @@ class UpdateCurrentOrderRequest extends OrderRequest {
   static createFromOrder(order: Order, options: ?UpdateCurrentOrderRequestConstructor) {
     const props = {
       id: order.orderId || order.id,
-      payment: order.payments,
+      payments: order.payments,
+      shippingAddress: order.shippingAddress,
+      billingAddress: order.billingAddress,
       shippingGroups: order.shippingGroups,
       shoppingCart: order.shoppingCart,
       combineLineItems: 'yes',

@@ -5,6 +5,8 @@ import ProfileService from '~/store/services/ProfileService';
 import OrderService from '~/store/services/OrderService';
 import OrderRequest from '~/store/models/requests/OrderRequest';
 import OrderBuilder from '~/store/OrderBuilder';
+import Address from '../../src/store/models/Address';
+import PaymentGroup from '../../src/store/models/order/PaymentGroup';
 
 const context = new Context({
   envUrl: 'http://localhost:3000',
@@ -45,9 +47,67 @@ async function test() {
       productId: 'IQ2RPQ',
     });
 
-    await builder.refresh();
+    const address: Address = new Address({
+      alias: 'Test',
+      firstName: 'Maycon',
+      lastName: 'Mellos',
+      address1: '201 Spear street',
+      address2: 'test',
+      city: 'San Francisco',
+      selectedCountry: 'US',
+      selectedState: 'CA',
+      postalCode: '94105000',
+      state_ISOCode: 'US-CA',
+      // country: 'US',
+    });
 
-    console.log(builder.getOrder().priceInfo);
+    // "alias":"Address",
+    //   "prefix":"",
+    //   "firstName":"Test",
+    //   "middleName":"",
+    //   "lastName":"Tester",
+    //   "suffix":"",
+    //   "country":"United States",
+    //   "postalCode":"94105",
+    //   "address1":"201 Spear street",
+    //   "address2":"",
+    //   "address3":"",
+    //   "city":"San Francisco",
+    //   "state":"California",
+    //   "county":"",
+    //   "phoneNumber":"",
+    //   "email":"maycon.mello@objectedge.com",
+    //   "jobTitle":"",
+    //   "companyName":"",
+    //   "faxNumber":"",
+    //   "type":"",
+    //   "repositoryId":"1566777",
+    //   "isDefaultBillingAddress":false,
+    //   "isDefaultShippingAddress":false,
+    //   "computedDefaultBilling":false,
+    //   "computedDefaultShipping":false,
+    //   "selectedCountry":"US",
+    //   "selectedState":"CA",
+    //   "state_ISOCode":"US-CA",
+    //   "defaultCountryCode":"US",
+    //   "isDefaultAddress":false,
+    //   "saveToAccount":false,
+    //   "saveAddressTo":"profile",
+  
+    builder.getOrder().shippingAddress = address;
+    builder.getOrder().billingAddress = address;
+    builder.getOrder().payments = [new PaymentGroup({
+      type: 'generic',
+      customProperties: {
+        'sourceToken': null,
+        'saveCard': false,
+        'useSavedCard': true
+      }
+   })];
+
+   await builder.refresh();
+
+  console.log(builder.getOrder().shippingAddress);
 
   } catch(err) {
     console.log(err);

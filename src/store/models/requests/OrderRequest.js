@@ -53,7 +53,8 @@ class OrderRequest {
 
     this.shoppingCart = new ShoppingCart(props.shoppingCart);
 
-    console.log(props.shippingGroups);
+    this.shippingAddress = props.shippingAddress;
+    this.billingAddress = props.billingAddress;
   }
 }
 

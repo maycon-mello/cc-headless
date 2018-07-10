@@ -63,6 +63,8 @@ class OrderService extends Service {
       order = UpdateCurrentOrderRequest.createFromOrder(order);
     }
 
+    console.log('#mzm update order with', order.shippingAddress);
+
     const { data } = await this.request.post({
       url: `/orders/current`,
       data: order,

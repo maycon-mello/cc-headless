@@ -9,6 +9,7 @@ export type PaymentGroupConstructor = {
   uiIntervention: any;
   paymentMethod: string;
   isAmountRemaining: boolean;
+  customProperties: Object;  
   paymentState: string;
   type: string;
   currencyCode: string;
@@ -24,6 +25,7 @@ class PaymentGroup {
   paymentMethod: string;
   isAmountRemaining: boolean;
   paymentState: string;
+  customProperties: Object;
   type: string;
   currencyCode: string;
 
@@ -31,6 +33,7 @@ class PaymentGroup {
     this.paymentGroupId = props.paymentGroupId;
     this.amount = props.amount;
     this.customPaymentProperties = props.customPaymentProperties;
+    this.customProperties = props.customProperties;
     this.gatewayName = props.gatewayName;
     this.uiIntervention = props.uiIntervention;
     this.paymentMethod = props.paymentMethod;
