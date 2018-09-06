@@ -9,15 +9,30 @@ class StoreContext extends Context {
 
   constructor(props: ContextConstructor) {
     super(props);
-    this.setBasePath('/ccstore/v1');
   }
 
-  getSession(): ISession {
+  getSession(): Promise<ISession> {
+    if (this.session.isLoading) {
+      return new Promise((resolve, reject) => {
+        this.session.loadListeners.push({
+          resolve,
+          reject,
+        });
+      });
+    }
+
     return this.session;
   }
 
   setSession(session: ISession) {
     this.session = session;
+  }
+
+  setAuthToken(token: string) {
+    this.authToken = token;
+    if (this.session) {
+      this.session.setAuthToken(token);
+    }
   }
 }
 

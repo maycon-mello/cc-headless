@@ -47,6 +47,7 @@ class CCRequest {
   addDefaultHeaders(configs: AxiosRequestConfig) {
     const headers:any = {
       'Content-Type': 'application/json',
+      'Accept': 'application/json',
     };
 
     const authToken = this.context.getAuthToken();
@@ -98,7 +99,13 @@ class CCRequest {
     try {
       return await axios(configs);
     } catch(err) {
-      throw err.response.data;
+      console.error(err);
+
+      if (err.response && err.response.data) {
+        throw err.response.data;
+      }
+
+      throw err;
     }
   }
 

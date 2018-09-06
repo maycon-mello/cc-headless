@@ -1,5 +1,5 @@
 // @flow
-import express, { RequestHandler } from 'express';
+import Express, { RequestHandler } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import proxyMiddleware from './proxyMiddleware';
@@ -16,7 +16,7 @@ export default class Proxy {
   /**
    * Express app
    */
-  app: express;
+  app: Express;
   
   /**
    * Props
@@ -32,7 +32,7 @@ export default class Proxy {
    * @param {ProxyProps} props 
    */
   constructor(props: ProxyProps) {
-    const app = express();
+    const app = Express();
 
     this.urlencodedParser = bodyParser.urlencoded({
       extended: false,
@@ -54,13 +54,13 @@ export default class Proxy {
    */
   use() {
     const { app } = this;
-    return app.use.apply(app, arguments);
+    return app.use.apply(app, this.getRequestHandlers(arguments));
   }
 
   getRequestHandlers(handlers: Array<RequestHandler>): Array<RequestHandler> {
     return [
-      this.jsonParser,
-      this.urlencodedParser,
+      // this.jsonParser,
+      // this.urlencodedParser,
       ...handlers,
     ];
   }
@@ -85,6 +85,10 @@ export default class Proxy {
     return app.options(url, handlers);
   }
 
+  createRouter() {
+    return Express.Router();
+  }
+
   /**
    * 
    */
@@ -92,8 +96,10 @@ export default class Proxy {
     const { app, props } = this;
     const { port } = props;
 
-    app.use(proxyMiddleware(props));
-   
+    if (props.target) {
+      app.use(proxyMiddleware(props));
+    }
+
     app.listen(port, () => {
       console.log(`Proxy listening on port ${port}`)
     });

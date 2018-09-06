@@ -1,6 +1,7 @@
 import proxy from 'http-proxy-middleware';
 import Util from './util';
 import manipulateBody from './manipulateBody';
+import Cache from './cache';
 
 export default (props) => proxy({
   target: props.target,
@@ -41,6 +42,6 @@ export default (props) => proxy({
       return body;
     });
 
-    applyBodyUpdate(proxyRes, res, res);
+    // applyBodyUpdate(proxyRes, res, res);
   }
 });

@@ -1,0 +1,88 @@
+{
+  "op": "submitOrder",
+  "id": "o2190174",
+  "amountRem aining": "115.95",
+  "profileId": "3411825",
+  "appliedPromotions": [],
+  "requestChannel": "agent",
+  "shoppingCart": {
+    "orderTotal": 115.95,
+    "items": [
+      {
+        "catRefId": "444",
+        "productId": "pralinegiftbox",
+        "quantity": 1
+      }
+    ],
+    "coupons": []
+  },
+  "payments": [
+    {
+      "endYear": 2021,
+      "cardTypeName": "Visa",
+      "nameO nCard": "Carolyn Radosevich",
+      "cardCVV": "071",
+      "type": "card",
+      "cardType": "visa",
+      "endMonth": "02",
+      "cardNumber": "4046440001071725",
+      "amount": "115.95"
+    }
+  ],
+  "billingAddress": {
+    "alias": "",
+    "prefix": "",
+    "firstName": "Carolyn and Frank",
+    "middleName": "",
+    "lastName": "Radosevich",
+    "suffix": "",
+    "country": "US",
+    "postalCode": "61614",
+    "address1": "5632 N Isabell Ave",
+    "address2": "",
+    "address3": "",
+    "city": "Peoria",
+    "state": "IL",
+    "phoneNumber": "",
+    "jobTitle": "",
+    "companyName": "",
+    "faxNumber": "",
+    "selectedCountry": "US",
+    "selectedState": "IL",
+    "state_ISOCode": "US-IL",
+    "defaultCountryCode": "US",
+    "isDefaultAddress": false,
+    "email": "cjrad2002@yahoo.com"
+  },
+  "extraShippingInfo": "{\"Q2Fyb2x5biBhbmQgRnJhbmt8fFJhZG9zZXZpY2h8NTYzMiBOIElzYWJlbGwgQXZlfHx8UGVvcmlhLVVQUyBHcm91bmQgUmVzaWRlbnRpYWw=\":{\"shipOnDate\":\"2018-08-31T17:00:00.000Z\",\"greetingsMessage\":\"Thank You! \\nOur sincere thanks for your valued business. \\nWe appreciate having you as our customer and look forward to serving you again.\",\"memo\":\"\"}}",
+  "omsPaymentMethod": "{\"paymentMethod\":\"card\",\"specialNumber\":\"\"}",
+  "omsAgent": "Lauren Cevallos",
+  "shippingAddress": {
+    "alias": "",
+    "prefix": "",
+    "firstName": "Carolyn and Frank",
+    "middleName": "",
+    "lastName": "Radosevich",
+    "suffix": "",
+    "country": "US",
+    "postalCode": "61614",
+    "address1": "5632 N Isabell Ave",
+    "address2": "",
+    "address3": "",
+    "city": "Peoria",
+    "state": "IL",
+    "county": "",
+    "jobTitle": "",
+    "companyName": "",
+    "faxNumber": "",
+    "selectedCountry": "US",
+    "selectedState": "IL",
+    "state_ISOCode": "US-IL",
+    "defaultCountryCode": "US",
+    "isDefaultAddress": false,
+    "email": "cjrad2002@yahoo.com"
+  },
+  "shippingMethod": {
+    "value": "UPS Ground Residential"
+  }
+}

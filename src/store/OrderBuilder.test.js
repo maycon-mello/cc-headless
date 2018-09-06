@@ -12,15 +12,15 @@ describe('Store', () => {
       builder = new OrderBuilder(context);
     });
 
-    describe('constructor:', () => {
-      it('expect to create order service', () => {
-        expect(builder.service instanceof OrderService).to.equal(true);
-      });
+    // describe('constructor:', () => {
+    //   it('expect to create order service', () => {
+    //     expect(builder.service instanceof OrderService).to.equal(true);
+    //   });
 
-      it('expect to assign context attribute', () => {
-        expect(builder.context).to.deep.equal(context);
-      });
-    });
+    //   it('expect to assign context attribute', () => {
+    //     expect(builder.context).to.deep.equal(context);
+    //   });
+    // });
 
     describe('getters and setters:', () => {
       it('expected to set isGuest', () => {

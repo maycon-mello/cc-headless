@@ -10,6 +10,12 @@ export type ShoppingCartConstructor = {
   coupons: Array<Coupon>;
 }
 
+const EmptyShoppingCart = () => ({
+  items: [],
+  numberOfItems: 0,
+  coupons: [],
+});
+
 /**
  * @memberOf store.models
  */
@@ -18,7 +24,7 @@ class ShoppingCart {
   numberOfItems: number;
   coupons: Array<Coupon>
 
-  constructor(props: ShoppingCartConstructor) {
+  constructor(props: ShoppingCartConstructor = EmptyShoppingCart()) {
     this.items = (props.items || []).map(item => new ShoppingCartItem(item));
     this.numberOfItems = props.numberOfItems;
     this.coupons = (props.coupons || []).map(item => new Coupon(item));
@@ -84,6 +90,10 @@ class ShoppingCart {
   removeItem(skuId: string): ShoppingCart {
     this.items = this.items.filter(item => item.skuId !== skuId);
     return this;
+  }
+  
+  getNumberOfItems() {
+    return this.numberOfItems || this.items.reduce((sum, item) => sum + item.quantity, 0);
   }
 }
 

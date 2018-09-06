@@ -2,6 +2,8 @@
 import Order from './models/order/Order';
 import OrderService from './services/OrderService';
 import StoreContext from '~/store/core/StoreContext';
+import ContextProvider from '~/core/ContextProvider';
+import ShoppingCart from './models/order/ShoppingCart';
 
 /**
  * Create an order
@@ -11,11 +13,12 @@ class OrderBuilder {
   isGuest: boolean;
   service: OrderService;
   isLoading: boolean;
-  
-  constructor(service: OrderService, order: Order, isGuest: boolean) {
+
+  constructor(service: OrderService, order: Order, isGuest: boolean, context: any) {
     this.service = service;
     this.isGuest = isGuest;
     this.order = order;
+    this.context = context;
   }
 
   setIsGuest(isGuest: boolean) {
@@ -27,7 +30,6 @@ class OrderBuilder {
   }
 
   async update(order: Order): Promise<Order> {
-    this.isLoading = true;
     let updatedOrder;
 
     if (this.isGuest) {
@@ -37,7 +39,12 @@ class OrderBuilder {
     }
 
     this.order = updatedOrder;
-    this.isLoading = false;
+
+    const session = this.context.session;
+
+    if (session) {
+      session.setOrder(order);
+    }
 
     return updatedOrder;
   }
@@ -46,10 +53,23 @@ class OrderBuilder {
     return this.order;
   }
 
+  getShoppingCart(): ShoppingCart {
+    if (!this.order.shoppingCart instanceof ShoppingCart) {
+      this.order.shoppingCart = new ShoppingCart(this.order.shoppingCart || {});
+    }
+
+    return this.order.shoppingCart;
+  }
+
+  setOrder(order: Order): OrderBuilder {
+    this.order = order;
+    return this;
+  }
+
   /**
    * 
    */
-  async refresh(): Promise<Order> {
+  async priceOrder(): Promise<Order> {
     return this.update(this.order);
   }
 
@@ -61,23 +81,41 @@ class OrderBuilder {
 
   }
 
-  static async create(context: StoreContext, isGuest: boolean) {
+  static async create({ context, isGuest = false } = {}) {
+    if (!context) {
+      context = ContextProvider.getContext();
+    }
+
+    if (context instanceof StoreContext === false) {
+      // throw 'The current context must be an instance of StoreContext'
+    }
+
     const service = new OrderService(context);
 
     // get order from session if exists
-    const session = context.getSession();
-    const order = session && session.getOrder();
+    const session = await context.getSession();
 
-    const builder = new OrderBuilder(service, order, isGuest);
+    // const order = session && session.getOrder();
+    let order;
 
-    if (!isGuest) {
-      await builder.fetchCurrentOrder();
+    if (session && session.isLoggedIn()) {
+      order = await service.getCurrent();
+    } else {
+      isGuest = true;
+    }
 
-      // Update session
-      if (session) {
-        session.setOrder(builder.getOrder());
+    if (!order) {
+      order = new Order();
+      if (session && session.getOrder()) {
+        order = session.getOrder();
       }
     }
+
+    if (session) {
+      session.setOrder(order);
+    }
+
+    const builder = new OrderBuilder(service, order, isGuest, context);
 
     return builder;
   }

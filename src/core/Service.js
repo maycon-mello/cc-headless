@@ -17,6 +17,7 @@ class Service {
    */
   constructor(context: Context) {
     this.request = new CCRequest(context);
+    this.context = context;
   }
 
   getContext(): Context {

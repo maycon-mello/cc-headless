@@ -10,5 +10,9 @@ export interface ISession {
   setOrder(order: Order): void;
   getOrder(): Order;
   setProfile(profile: Profile): void;
-  getProfile(): Profile
+  getProfile(): Profile;
+  setAuthToken(): void;
+  getAuthToken(): string;
+  isLoggedIn(): boolean;
+  clear(): void;
 }

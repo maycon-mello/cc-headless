@@ -74,7 +74,7 @@ class Order {
   shoppingCart: ShoppingCart;  
   rawResponse: Object;
 
-  constructor(props: OrderConstructor) {
+  constructor(props: OrderConstructor = {}) {
     this.id = props.id;
     this.orderId = props.orderId;
     this.creationTime = props.creationTime;
@@ -87,24 +87,57 @@ class Order {
     this.uuid = props.uuid;
     this.state = props.state;
     this.orderLocale = props.orderLocale;    
-    this.discountInfo = new DiscountInfo(props.discountInfo);
-    this.priceListGroup = new PriceListGroup(props.priceListGroup);
-    this.shippingMethod = props.shippingMethod && new ShippingMethod(props.shippingMethod);
+
+    if (props.discountInfo) {
+      this.discountInfo = new DiscountInfo(props.discountInfo);
+    }
+
+    if (props.priceListGroup) {
+      this.priceListGroup = new PriceListGroup(props.priceListGroup);
+    }
+
+    if (props.shippingMethod) {
+      this.shippingMethod = new ShippingMethod(props.shippingMethod);
+    }
+
     this.approvalSystemMessages = props.approvalSystemMessages;
     this.trackingInfo = props.trackingInfo;
     this.giftWithPurchaseOrderMarkers = props.giftWithPurchaseOrderMarkers;
-    this.billingAddress = props.billingAddress && new Address(props.billingAddress);
+
+    if (props.billingAddress) {
+      this.billingAddress = new Address(props.billingAddress);
+    }
 
     if (props.shippingAddress) { 
       this.shippingAddress = new Address(props.shippingAddress);
     }
 
-    this.taxPriceInfo = props.taxPriceInfo && new TaxPriceInfo(props.taxPriceInfo);
-    this.priceInfo = new PriceInfo(props.priceInfo);
-    this.dynamicProperties = props.dynamicProperties.map(item => new DynamicProperty(item));
-    this.payments = props.payments && props.payments.map(item => new PaymentGroup(item));
-    this.shippingGroups = props.shippingGroups && props.shippingGroups.map(item => new ShippingGroup(item));
-    this.shoppingCart = props.shoppingCart && new ShoppingCart(props.shoppingCart);
+    if (props.taxPriceInfo) {
+      this.taxPriceInfo = new TaxPriceInfo(props.taxPriceInfo);
+    }
+
+    if (props.priceInfo) {
+      this.priceInfo = new PriceInfo(props.priceInfo);
+    }
+
+    if (props.dynamicProperties) {
+      this.dynamicProperties = props.dynamicProperties.map(item => new DynamicProperty(item));
+    }
+
+    if (props.payments) {
+      this.payments =props.payments.map(item => new PaymentGroup(item));
+    }
+
+    if (props.shippingGroups) {
+      this.shippingGroups = props.shippingGroups.map(item => new ShippingGroup(item));
+    }
+
+    if (props.shoppingCart) {
+      this.shoppingCart = new ShoppingCart(props.shoppingCart);
+    } else {
+      this.shoppingCart = new ShoppingCart({});
+    }
+
     this.rawResponse = props;
   }
 }

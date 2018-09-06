@@ -35,7 +35,7 @@ class OrderService extends Service {
    */
   async getById(orderId: string): Promise<Order>{
     const { data } = await this.request.get({
-      url: `/orders/${orderId}`,
+      url: `/ccstore/v1/orders/${orderId}`,
     });
 
     return new Order(data);
@@ -47,7 +47,7 @@ class OrderService extends Service {
    */
   async getCurrent(): Promise<Order>{
     const { data } = await this.request.get({
-      url: `/orders/current`,
+      url: `/ccstore/v1/orders/current`,
     });
 
     return new Order(data);
@@ -66,7 +66,7 @@ class OrderService extends Service {
     console.log('#mzm update order with', order.shippingAddress);
 
     const { data } = await this.request.post({
-      url: `/orders/current`,
+      url: `/ccstore/v1/orders/current`,
       data: order,
     });
 
@@ -84,7 +84,7 @@ class OrderService extends Service {
     }
 
     const { data } = await this.request.post({
-      url: `/orders/current`,
+      url: `/ccstore/v1/orders/current`,
       data: order,
     });
 
@@ -102,7 +102,7 @@ class OrderService extends Service {
     }
 
     const { data } = await this.request.post({
-      url: `/orders/${order.id}`,
+      url: `/ccstore/v1/orders/${order.id}`,
       data: order,
     });
 
@@ -120,7 +120,7 @@ class OrderService extends Service {
     }
 
     const { data } = await this.request.post({
-      url: `/orders`,
+      url: `/ccstore/v1/orders`,
       data: order,
     });
 
@@ -138,8 +138,9 @@ class OrderService extends Service {
     }
 
     const { data } = await this.request.post({
-      url: `/orders/price`,
+      url: `/ccstore/v1/orders/price`,
       data: order,
+      public: true,
     });
 
     return new Order(data);

@@ -34,6 +34,7 @@ benchmarks/graphs
 
 # Build Output
 /dist
+/build
 
 # Test Output
 /test/e2e/screenshots

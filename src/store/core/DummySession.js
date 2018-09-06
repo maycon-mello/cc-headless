@@ -28,6 +28,22 @@ class DummySession {
   setProfile(profile: Profile) {
     this.profile = profile;
   }
+
+  isLoggedIn(): boolean {
+    return false;
+  }
+
+  getAuthToken(): string {
+    return "";
+  }
+
+  setAuthToken(token: string) {
+    
+  }
+
+  clear() {
+    
+  }
 }
 
 export default DummySession;

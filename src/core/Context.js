@@ -38,6 +38,7 @@ class Context {
   authToken: ?string;
   applicationKey: ?string;
   basePath: string;
+  session: ?any;
 
   /**
    * Create context
@@ -57,6 +58,10 @@ class Context {
 
   setAuthToken(token: string) {
     this.authToken = token;
+
+    if (this.session) {
+      this.session.setAuthToken(token);
+    }
   }
 
   getEnableEnvAuth(): boolean {
